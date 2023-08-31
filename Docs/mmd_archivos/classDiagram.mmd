@@ -78,11 +78,16 @@ class Duenio {
   - string nombres
   - string telefono
 }
+class Rol{
+  - string supervisor
+  - string supervisor_suplente
+
+}
 
 
 Veterinaria "*" *-- "2.." Sucursal
 Sucursal "1" *-- "*" Empleado
-Sucursal "1" *-- "*" Perro
+Sucursal "1" *-- "*" Duenio
 Sucursal "1" *-- "*" Consulta
 Empleado <|-- Veterinario
 Perro "1" *-- "*" Consulta
@@ -90,3 +95,5 @@ Perro "1" *-- "*" Vacuna
 Perro *-- Duenio
 Consulta "1" *-- "*" Medicamento
 Perro "*" --> "1" Raza
+Duenio "1" *-- "*" Perro
+Empleado "1" --> Rol
