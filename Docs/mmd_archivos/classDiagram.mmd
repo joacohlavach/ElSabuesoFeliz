@@ -22,6 +22,9 @@ class Empleado {
   - date fechaNacimiento
   - date fechaIngreso 
   - sucursal Sucursal
+
+  + verificarRecibido()
+  
 }
 class Veterinario {
   - string matriculaHabilitante
@@ -85,15 +88,15 @@ class Rol{
 }
 
 
-Veterinaria "*" *-- "2.." Sucursal
-Sucursal "1" *-- "*" Empleado
-Sucursal "1" *-- "*" Duenio
-Sucursal "1" *-- "*" Consulta
+Veterinaria "*" <-- "2.." Sucursal
+Sucursal "1" <-- "*" Empleado
+Sucursal "1" <-- "*" Duenio
+Sucursal "1" <-- "*" Consulta
 Empleado <|-- Veterinario
-Perro "1" *-- "*" Consulta
-Perro "1" *-- "*" Vacuna
-Perro *-- Duenio
-Consulta "1" *-- "*" Medicamento
+Perro "1" <-- "*" Consulta
+Perro "1" <-- "*" Vacuna
+Perro <-- Duenio
+Consulta "1" <-- "*" Medicamento
 Perro "*" --> "1" Raza
-Duenio "1" *-- "*" Perro
+Duenio "1" <-- "*" Perro
 Empleado "1" --> Rol
