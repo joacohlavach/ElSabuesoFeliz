@@ -2,6 +2,8 @@ classDiagram
 class Veterinaria {
   -String nombre
   -sucursales sucursal
+
+  +new()
   +agregarSucursal()
 }
 class Sucursal {
@@ -10,6 +12,8 @@ class Sucursal {
   -empleados empleado
   -perros perro
   -consultas consulta
+
+  +new()
   +agregarEmpleado()
   +agregarPerro()
   +agregarConsulta()
@@ -22,7 +26,9 @@ class Empleado {
   -date fechaIngreso
   -sucursal sucursal
 
+  +new()
   +verificarRecibido()
+  +generarNumHistoriaClinicaPerro()
   
 }
 class Perro {
@@ -35,6 +41,8 @@ class Perro {
   -duenio duenio
   -String consulta
   -String vacuna
+
+  +new()
 }
 class Raza {
   -String denominacion
@@ -45,16 +53,21 @@ class Raza {
   -float alturaMediaMachos
   -float alturaMediaHembras
   -float cuidadosEspeciales
+
+  +new()
 }
 class Consulta {
   -int numero_orden
+  -int numeroHistoriaClinica_perro
   -date fechaEntrada
-  -empleado empleado
-  -perro perro
+  -String num_doc_empleado
   -String sintomas
   -String diagnosticos
   -String medicamento
   -date fechaSalida
+
+  +new()
+  +recetarMedicamentos()
 }
 class Vacuna {
   -String tipo
@@ -63,6 +76,8 @@ class Vacuna {
   -String empleado
   -String laboratorio
   -String dosis
+
+  +new()
 }
 class Medicamento {
   -String nombre
@@ -70,18 +85,21 @@ class Medicamento {
   -date fechaUltimaCompra
   -int cantidadExistente
   -int cantidadMinima
+
+  +new()
 }
 
 class DuenioPerro {
   -String apellido
   -String nombres
   -String telefono
+
+  +new()
 }
 class EstadoEmpleado {
   -String estudiante
   -String recibido
 }
-
 class Rol {
   -String supervisor
   -String supervisor_suplente
@@ -89,12 +107,12 @@ class Rol {
 
 Veterinaria --> Sucursal
 Sucursal "1" <-- "*" Empleado
-Sucursal "*" <-- "*" Perro
 Sucursal "1" <-- "*" Consulta
+Sucursal "*" <-- "*" Perro
 Empleado --> EstadoEmpleado
+Perro "*" --> "1" Raza
 Perro "1" <-- "*" Consulta
 Perro "1" <-- "*" Vacuna
-Consulta "1" <-- "*" Medicamento
-Perro "*" --> "1" Raza
+Consulta "1" --> "*" Medicamento
 DuenioPerro "*" <-- "*" Perro
 EstadoEmpleado "1" --> Rol
