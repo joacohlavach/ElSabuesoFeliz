@@ -1,78 +1,98 @@
 classDiagram
-class Veterinaria {
-  -String nombre
-  -sucursales sucursal
-
-  +new()
-  +agregarSucursal()
-}
 class Sucursal {
-  -int id
   -String direccion
-  -empleados empleado
-  -perros perro
-  -consultas consulta
+  -Empleados empleado
+  -Consultas consulta
 
   +new()
   +agregarEmpleado()
-  +agregarPerro()
   +agregarConsulta()
 }
 class Empleado {
-  -String numeroDocumento
+  -Int numeroDocumento
   -String nombres
   -String apellido
-  -date fechaNacimiento
-  -date fechaIngreso
-  -sucursal sucursal
+  -Date fechaNacimiento
+  -Date fechaIngreso
+  -Sucursal sucursal
 
   +new()
-  +verificarRecibido()
-  +generarNumHistoriaClinicaPerro()
   
 }
+class AsignacionEmpleados {
+  -Date fechaIngreso
+  -Date fechaEgreso
+  -String descripcion
+
+  +new()
+  +verificarEstadoEmpleado()
+  +verificarRolEmpleado()
+}
 class Perro {
-  -int numeroHistoriaClinica
+  -Int numeroHistoriaClinica
   -String nombre
-  -date fechaNacimiento
-  -raza raza
-  -float pesoActual
-  -float alturaActual
-  -duenio duenio
+  -Date fechaNacimiento
+  -Raza raza
+  -Float pesoActual
+  -Float alturaActual
+  -Personas historialMascotas
   -String consulta
   -String vacuna
+
+  +new()
+  +generarNumHistoriaClinica()
+  +verificarPersona()
+}
+class HistorialMascotas {
+  -Personas historialMascotas
+  -String estadoPerro
+  -String rolPersona
+
+  +new()
+  +verificarEstadoPerro()
+  +verificarRolPersona()
+}
+class Persona {
+  -String nombrePersona
+  -Int numDocPersona
+  -String descripcion
 
   +new()
 }
 class Raza {
   -String denominacion
-  -float pesoMinimoMachos
-  -float pesoMaximoMachos
-  -float pesoMinimoHembras
-  -float pesoMaximoHembras
-  -float alturaMediaMachos
-  -float alturaMediaHembras
-  -float cuidadosEspeciales
+  -Float pesoMinimoMachos
+  -Float pesoMaximoMachos
+  -Float pesoMinimoHembras
+  -Float pesoMaximoHembras
+  -Float alturaMediaMachos
+  -Float alturaMediaHembras
+  -Float cuidadosEspeciales
 
   +new()
 }
 class Consulta {
-  -int numero_orden
-  -int numeroHistoriaClinica_perro
-  -date fechaEntrada
-  -String num_doc_empleado
-  -String sintomas
+  -Int numeroOrden
+  -Date fechaEntrada
+  -String sIntomas
   -String diagnosticos
   -String medicamento
-  -date fechaSalida
+  -Date fechaSalida
 
   +new()
+  +verificarPersona()
+  +identificarNumHistoriaClinica()
   +recetarMedicamentos()
 }
+class Vacunacion {
+  -Date fechaProgramada
+  -Date fechaReal
+  -String descripcion
+
+  +new()
+}
 class Vacuna {
-  -String tipo
-  -date fechaProgramada
-  -date fechaReal
+  -String nombreVacuna
   -String empleado
   -String laboratorio
   -String dosis
@@ -82,37 +102,33 @@ class Vacuna {
 class Medicamento {
   -String nombre
   -String laboratorio
-  -date fechaUltimaCompra
-  -int cantidadExistente
-  -int cantidadMinima
-
-  +new()
-}
-
-class DuenioPerro {
-  -String apellido
-  -String nombres
-  -String telefono
+  -Date fechaUltimaCompra
+  -Int cantidadExistente
+  -Int cantidadMinima
 
   +new()
 }
 class EstadoEmpleado {
   -String estudiante
   -String recibido
+  -String trabaja
+  -String noTrabaja
 }
-class Rol {
+class RolEmpleado {
   -String supervisor
-  -String supervisor_suplente
+  -String supervisorSuplente
 }
 
-Veterinaria --> Sucursal
-Sucursal "1" <-- "*" Empleado
-Sucursal "1" <-- "*" Consulta
-Sucursal "*" <-- "*" Perro
-Empleado --> EstadoEmpleado
-Perro "*" --> "1" Raza
+Sucursal "1" --> "*" Consulta
+AsignacionEmpleados <-- Sucursal
+AsignacionEmpleados --> EstadoEmpleado
+AsignacionEmpleados --> RolEmpleado
+Empleado <-- AsignacionEmpleados
 Perro "1" <-- "*" Consulta
-Perro "1" <-- "*" Vacuna
+Perro "1" --> "*" Vacunacion
+Vacunacion --> Vacuna
 Consulta "1" --> "*" Medicamento
-DuenioPerro "*" <-- "*" Perro
-EstadoEmpleado "1" --> Rol
+Consulta --> Persona
+HistorialMascotas <-- Perro
+HistorialMascotas "1" --> "*" Persona
+Perro "*" --> "1" Raza
