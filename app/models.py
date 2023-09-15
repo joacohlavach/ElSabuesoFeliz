@@ -1,27 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class Veterinaria(models.Model):
-    name = models.CharField(max_length=50)
-    codigo_vet = models.IntegerField()
-
-    def __str__(self):
-        return self.name
-    
-
-class Perro(models.Model):
-    numeroHistoriaClinica = models.IntegerField()
-    nombre = models.CharField(max_length=100)
-    fechaNacimiento = models.DateField()
-    raza = models.ForeignKey(Raza, on_delete=models.CASCADE)
-    pesoActual = models.FloatField()
-    alturaActual = models.FloatField()
-    duenio = models.ForeignKey(Duenio, on_delete=models.CASCADE)
-    consulta = models.TextField()
-    vacuna = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
     
 class Raza(models.Model):
     denominacion = models.CharField(max_length=100)
@@ -43,4 +22,19 @@ class Duenio(models.Model):
 
     def __str__(self):
         return f"{self.apellido}, {self.nombres}"
+class Perro(models.Model):
+    numeroHistoriaClinica = models.IntegerField()
+    nombre = models.CharField(max_length=100)
+    fechaNacimiento = models.DateField()
+    raza = models.ForeignKey(Raza, on_delete=models.CASCADE)
+    pesoActual = models.FloatField()
+    alturaActual = models.FloatField()
+    duenio = models.ForeignKey(Duenio, on_delete=models.CASCADE)
+    consulta = models.TextField()
+    vacuna = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+
     
