@@ -1,140 +1,178 @@
 classDiagram
-class Sucursal {
-  -String direccion
-  -Empleados empleado
-  -Consultas consulta
+  class Sucursal {
+    -String direccion
+    -Empleados empleado
+    -Consultas consulta
 
-  +new()
-  +agregarEmpleado()
-  +agregarConsulta()
-}
-class Empleado {
-  -Int numeroDocumento
-  -String nombres
-  -String apellido
-  -Date fechaNacimiento
-  -Date fechaIngreso
-  -Sucursal sucursal
+    +new()
+    +agregarEmpleado()
+    +agregarConsulta()
+  }
+  class Empleado {
+    -Int numeroDocumento
+    -String nombres
+    -String apellido
+    -Date fechaNacimiento
+    -Date fechaIngreso
+    -Sucursal sucursal
 
-  +new()
-  
-}
-class AsignacionEmpleados {
-  -Date fechaIngreso
-  -Date fechaEgreso
-  -String descripcion
+    +new()
+    
+  }
+  class AsignacionEmpleados {
+    -Date fechaIngreso
+    -Date fechaEgreso
+    -String descripcion
 
-  +new()
-  +verificarEstadoEmpleado()
-  +verificarRolEmpleado()
-}
-class Perro {
-  -Int numeroHistoriaClinica
-  -String nombre
-  -Date fechaNacimiento
-  -Raza raza
-  -Float pesoActual
-  -Float alturaActual
-  -Personas historialMascotas
-  -String consulta
-  -String vacuna
+    +new()
+    +verificarEstadoEmpleado()
+    +verificarRolEmpleado()
+  }
+  class Perro {
+    -Int numeroHistoriaClinica
+    -String nombre
+    -Date fechaNacimiento
+    -Raza raza
+    -Float pesoActual
+    -Float alturaActual
+    -Personas historialMascotas
 
-  +new()
-  +generarNumHistoriaClinica()
-  +verificarPersona()
-}
-class HistorialMascotas {
-  -Personas historialMascotas
-  -String estadoPerro
-  -String rolPersona
+    +new()
+    +generarNumHistoriaClinica()
+    +verificarPersona()
+    +identificarVacunacion()
+  }
+  class HistorialMascotas {
+    -String estadoPerro
+    -String rolPersona
 
-  +new()
-  +verificarEstadoPerro()
-  +verificarRolPersona()
-}
-class Persona {
-  -String nombrePersona
-  -Int numDocPersona
-  -String descripcion
+    +new()
+    +verificarEstadoPerro()
+    +verificarRolPersona()
+  }
+  class Persona {
+    -String nombrePersona
+    -Int numDocPersona
+    -String descripcion
 
-  +new()
-}
-class Raza {
-  -String denominacion
-  -Float pesoMinimoMachos
-  -Float pesoMaximoMachos
-  -Float pesoMinimoHembras
-  -Float pesoMaximoHembras
-  -Float alturaMediaMachos
-  -Float alturaMediaHembras
-  -Float cuidadosEspeciales
+    +new()
+  }
+  class Raza {
+    -String denominacion
+    -Float pesoMinimoMachos
+    -Float pesoMaximoMachos
+    -Float pesoMinimoHembras
+    -Float pesoMaximoHembras
+    -Float alturaMediaMachos
+    -Float alturaMediaHembras
+    -Float cuidadosEspeciales
 
-  +new()
-}
-class Consulta {
-  -Int numeroOrden
-  -Date fechaEntrada
-  -String sIntomas
-  -String diagnosticos
-  -String medicamento
-  -Date fechaSalida
+    +new()
+  }
+  class Consulta {
+    -Int numeroOrden
+    -Date fechaEntrada
+    -String sintomas
+    -String diagnosticos
+    -String medicamento
+    -Date fechaSalida
+    String listaEmpleados
 
-  +new()
-  +verificarPersona()
-  +identificarNumHistoriaClinica()
-  +recetarMedicamentos()
-}
-class Vacunacion {
-  -Date fechaProgramada
-  -Date fechaReal
-  -String descripcion
+    +new()
+    +verificarPersona()
+    +verificarRolEmpleadoConsulta()
+    +identificarNumHistoriaClinica()
+    +recetarMedicamentos()
+    +verificarPerro()
+  }
+  class RegistroConsulta{
+    -String urls
+    -String devolucionConsulta
+    -String receta
 
-  +new()
-}
-class Vacuna {
-  -String nombreVacuna
-  -String empleado
-  -String laboratorio
-  -String dosis
+    +new()
+    +generarDevolucionConsulta()
+    +generarReceta()
+    +verificarMedicamentos()
+    +verificarVacunas()
+    +verificarPerro()
+    +verificarEmpleado()
+  }
+  class RolEmpleadoConsulta {
+    -String rolConsulta
+    -String descripcion
 
-  +new()
-}
-class Medicamento {
-  -String nombre
-  -String laboratorio
-  -Date fechaUltimaCompra
-  -Int cantidadExistente
-  -Int cantidadMinima
+    +new()
+    +identificarEmpleado()
+    +identificarNumConsulta()
+  }
+  class Vacunacion {
+    -Date fechaProgramada
+    -Date fechaReal
+    -String descripcion
 
-  +new()
+    +new()
+  }
+  class DuenioPerro {
+    -String apellido
+    -String nombres
+    -String telefono
+  }
+  class EstadoEmpleado {
+    -String estudiante
+    -String recibido
+    -String trabaja
+    -String noTrabaja
+  }
+  class RolEmpleado {
+    -String supervisor
+    -String supervisorSuplente
+
+    +new()
+    +verificarVacuna()
+    }
+  class Vacuna {
+    -String nombreVacuna
+    -String empleado
+    -String laboratorio
+    -String dosis
+
+    +new()
+  }
+  class Medicamento {
+    -String nombre
+    -String laboratorio
+    -Date fechaUltimaCompra
+    -Int cantidadExistente
+    -Int cantidadMinima
+
+    +new()
+  }
+  class EstadoEmpleado {
+    -String estudiante
+    -String recibido
+    -String trabaja
+    -String noTrabaja
+  }
+  class RolEmpleado {
+    -String supervisor
+    -String supervisorSuplente
   }
 
-class DuenioPerro {
-  -String apellido
-  -String nombres
-  -String telefono
-}
-class EstadoEmpleado {
-  -String estudiante
-  -String recibido
-  -String trabaja
-  -String noTrabaja
-}
-class RolEmpleado {
-  -String supervisor
-  -String supervisorSuplente
-}
-
-Sucursal "1" --> "*" Consulta
-AsignacionEmpleados <-- Sucursal
-AsignacionEmpleados --> EstadoEmpleado
-AsignacionEmpleados --> RolEmpleado
-Empleado <-- AsignacionEmpleados
-Perro "1" <-- "*" Consulta
-Perro "1" --> "*" Vacunacion
-Vacunacion --> Vacuna
-Consulta "1" --> "*" Medicamento
-Consulta --> Persona
-HistorialMascotas <-- Perro
-HistorialMascotas "1" --> "*" Persona
-Perro "*" --> "1" Raza
+  Consulta --> RolEmpleadoConsulta
+  RolEmpleadoConsulta --> Empleado
+  HistorialMascotas <-- Persona
+  Sucursal --> Consulta
+  AsignacionEmpleados <-- Sucursal
+  AsignacionEmpleados --> EstadoEmpleado
+  AsignacionEmpleados --> RolEmpleado
+  Empleado <-- AsignacionEmpleados
+  Perro <-- Consulta
+  Perro --> Vacunacion
+  Vacunacion --> Vacuna
+  Consulta --> RegistroConsulta
+  RegistroConsulta --> Medicamento
+  RegistroConsulta --> Vacuna
+  Consulta <-- Persona
+  HistorialMascotas --> Perro
+  Perro --> Raza
