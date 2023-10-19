@@ -1,0 +1,42 @@
+{% load static  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Perro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'CSS/RegisterPerros.css' %}">
+    <script src="https://kit.fontawesome.com/8c86341407.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <label for="nombre">Nombre Del Perro:</label><br>
+    <input type="text" name="Nombre" id="nombre" placeholder="Nombre Del Perro"><br><br>
+    <label for="Documento">Numero de historia clinica:</label><br>
+    <input type="number" name="Dni" id="NumDeH" placeholder="Numero de historia clinica del perro"><br><br>
+    <label for="Raza">Raza Del Perro:</label> <br> <br>
+    <input type="text" name="Raza" id="Raza" placeholder="Raza Del Perro"> <br> <br>
+    <label for="mail">Peso:</label><br>
+    <input type="email" name="Peso" id="Peso" placeholder="Peso del Perro"><br><br>
+    <label for="sexo">Sexo:</label><br> 
+    <input type="radio" name="genero" id="sexo">Femenino <br>
+    <input type="radio" name="genero" id="sexo">Masculino <br> <br>
+    <label for="sucu">Sucursal:</label><br> 
+    <input type="radio" name="Sucursal" id="sucu">Juan b justo 777 <br> 
+    <input type="radio" name="Sucursal" id="sucu">Humberto °1 599 <br> <br>
+    <label for="Nacimiento">Fecha De Nacimiento del Perro:</label> <br>
+    <input type="date" name="fechaN" id="Nacimiento"><br><br> 
+    <label for="Registro">Fecha De Registro del Perro:</label> <br><br>
+    <input type="date" name="FechaR" id="Registro"><br><br>
+    <label for="nombredueño">Nombre Del Dueño:</label><br>
+    <input type="text" name="NombreDueño" id="NombreDueño" placeholder="NOmbre Del Dueño">  <br>
+    <label for="ApellidoDueño"></label>
+    
+    
+    
+    
+    <input type="submit">
+     
+</body>
+</html>
