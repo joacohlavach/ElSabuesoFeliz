@@ -19,8 +19,9 @@
         <nav>
            <ul class="nav-links">
                 <li><a href="#">Sucursales</a></li>
-                <li><a href="Raza.html">Perros</a></li>
-                <li><a href="LoginPerros.html">Registrar Perro</a></li>
+                <li><a href="#">Sucursales</a></li>
+                <li><a href="razas/">Razas</a></li>
+                <li><a href="login/">Registrar Perro</a></li>
            </ul>            
         </nav>
         <a class="btn" href="Login.html"><button>Registrar Empleado</button></a>
@@ -33,12 +34,30 @@
 <!---->                <a href="#">Servicios</a>
 <!---->                <a href="#">Nosotros</a>
 <!---->                <a href="#">Contacto</a>
-<!---->                <a href="Login.html">Registrarse</a>
+<!---->                <a href="login/">Registrarse</a>
 <!---->            </div>
 <!---->        </div>
 
     </header>
 </div>
+<div class="contenedor-tajetas">
+    {% for raza in razas %}
+        <div class="tarjeta">
+            <div class="tarjeta-imagen" style="background-image: url('{{ producto.imagen }}'); ">
+            </div>
+            <h2>{{ raza.denominacion}}</h2>
+            <p>{{ raza.pesoMinimoMachos}}</p>
+            <p>{{ raza.pesoMaximoMachos }}</p>
+            <p>{{ raza.pesoMinimoHembras }}</p>
+            <p>{{ raza.pesoMaximoHembras }}</p>
+            <p>{{ raza.alturaMediaHembras }}</p>
+            <p>{{ raza.alturaMediaMachos }}</p>
+            <p>{{ raza.cuidadosEspeciales }}</p>
+
+            <span></span>
+        </div>
+    {% endfor %}
+
 <footer class="pie-pagina">
     <div class="grupo-1">
         <div class="box">

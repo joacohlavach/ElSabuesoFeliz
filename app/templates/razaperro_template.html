@@ -10,7 +10,6 @@
         {% for raza in razas %}
             <div class="tarjeta">
                 <div class="tarjeta-imagen" style="background-image: url('{{ producto.imagen }}'); ">
-                    <img class="tarjeta-imagen-img" src="{{ raza.imagen }}" alt="Producto">
                 </div>
                 <h2>{{ raza.denominacion}}</h2>
                 <p>{{ raza.pesoMinimoMachos}}</p>
@@ -21,7 +20,7 @@
                 <p>{{ raza.alturaMediaMachos }}</p>
                 <p>{{ raza.cuidadosEspeciales }}</p>
 
-                <span>$</span>
+                <span></span>
             </div>
         {% endfor %}
     

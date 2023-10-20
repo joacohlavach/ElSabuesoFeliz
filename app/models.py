@@ -77,7 +77,6 @@ class Persona(models.Model):
 
 
 class Raza(models.Model):
-    imagen= models.CharField(max_length=255)
     denominacion = models.CharField(max_length=255)
     pesoMinimoMachos = models.FloatField()
     pesoMaximoMachos = models.FloatField()
