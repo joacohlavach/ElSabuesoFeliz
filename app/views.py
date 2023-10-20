@@ -9,3 +9,6 @@ def login(request):
 
 def razaperro(request):
     return render(request, 'razaperro_template.html')
+
+def hola (request):
+    ...
