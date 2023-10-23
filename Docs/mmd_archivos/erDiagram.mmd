@@ -2,8 +2,8 @@ erDiagram
     Sucursal {
         Int id_sucursal PK
         Varchar direccion
-        Empleado empleado
-        Consulta consulta
+        Empleado empleado FK
+        Consulta consulta FK
     }
 
     Empleado {
@@ -13,6 +13,7 @@ erDiagram
         Date fechaNacimiento
         Date fechaIngreso
         Int id_sucursal FK
+        Int id_estadoEmpleado FK
     }
 
     AsignacionEmpleados {
@@ -55,12 +56,17 @@ erDiagram
         Float alturaMediaHembras
         Float cuidadosEspeciales
     }
+    Sintoma {
+        Int id_sintoma PK
+        String nombre
+        String descripcion
+    }
 
     Consulta {
         Int numeroOrden PK
         Date fechaEntrada
-        String sintomas
-        String diagnosticos
+        Int id_sintoma FK
+        String diagnostico
         String medicamento FK
         Date fechaSalida
         String listaEmpleados
@@ -73,7 +79,48 @@ erDiagram
         String receta
     }
     RolEmpleadoConsulta {
+        Int id_rolEmpleado PK
         String rolConsulta
         String descripcion
     }
+    Vacunacion {
+        Int id_vacunacion PK
+        Int codigoVacuna FK
+        Int numeroDocumento FK
+        Int numeroHistoriaClinica FK
+        Date fechaProgramada
+        Date fechaReal
+        String descripcion
+    }
+    EstadoEmpleado {
+        Int id_estadoEmpleado PK
+        String estado
+        String descripcion
+    }
+    Rol {
+        Int id_rolEmpleado PK
+        String nombre
+        String descripcion
+    }
+    Vacuna {
+        Int codigoVacuna PK
+        String nombreVacuna
+        String laboratorio
+        String dosis
+    }
+    Medicamento {
+        Int codigoMedicamento PK
+        String nombreMedicamento
+        String laboratorio
+        Date fechaUltimaCompra
+        Int cantidadExistente
+        Int cantidadMinima
+    }
+
+    Sucursal ||..|{ Empleado : tiene
+    Sucursal ||..|{ Consulta : tiene
+    EstadoEmpleado ||..|{ Empleado : tiene
+    RolEmpleado ||..|{ Empleado : tiene
+
+
 
