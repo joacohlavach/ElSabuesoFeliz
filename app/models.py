@@ -20,7 +20,7 @@ class Empleado(models.Model):
     fechaNacimiento = models.DateField()
     fechaIngreso = models.DateField()
     sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
-    estado = models.ForeignKey(HistorialEmpleado, on_delete=models.CASCADE)
+    estado = models.ForeignKey('EstadoEmpleado', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.nombre()
