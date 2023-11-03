@@ -15,19 +15,27 @@ classDiagram
     -Date fechaNacimiento
     -Date fechaIngreso
     -Sucursal sucursal
+    -EstadoEmpleado estado
 
     +new()
     
   }
-  class AsignacionEmpleados {
-    -Date fechaIngreso
-    -Date fechaEgreso
-    -String descripcion
+
+  class DetalleEmpleado {
+    -Bool estudia
+    -Int cantidad
 
     +new()
     +verificarEstadoEmpleado()
-    +verificarRolEmpleado()
   }
+
+  class Requerimiento {
+    -String nombre
+    -String descripcion
+
+    +new()
+  }
+
   class Perro {
     -Int numeroHistoriaClinica
     -String nombre
@@ -107,35 +115,52 @@ classDiagram
     +identificarNumConsulta()
   }
   class Vacunacion {
+    -Vacunacion vacunacion
     -Date fechaProgramada
     -Date fechaReal
     -String descripcion
 
     +new()
   }
-  class EstadoEmpleado {
-    -String estudiante
-    -String recibido
-    -String trabaja
-    -String noTrabaja
-  }
-  class RolEmpleado {
-    -String supervisor
-    -String supervisorSuplente
+  class HistorialRol {
+    -Date fechaInicio
+    -Date fechaFin
+    -String descripcion
 
     +new()
-    +verificarVacuna()
-    }
+    +verificarFechaFinal()
+  }
+  class Rol {
+    -String nombre
+    -String descripcion
+
+    +new()
+  }
+  class HistorialEmpleado {
+    -Date fechaInicio
+    -Date fechaFin
+    -String descripcion
+
+    +new()
+    +verificarFechaFin()
+  }
+  class EstadoEmpleado {
+    -String estado
+    -String descripcion
+
+    +new()
+  }
   class Vacuna {
+    -Vacuna vacuna
     -String nombreVacuna
-    -String empleado
     -String laboratorio
     -String dosis
 
     +new()
   }
   class Medicamento {
-    -String nombre
+    -Medicamento medicamento
+    -String nombreMedicamento
     -String laboratorio
     -Date fechaUltimaCompra
     -Int cantidadExistente
@@ -143,25 +168,18 @@ classDiagram
 
     +new()
   }
-  class EstadoEmpleado {
-    -String estudiante
-    -String recibido
-    -String trabaja
-    -String noTrabaja
-  }
-  class RolEmpleado {
-    -String supervisor
-    -String supervisorSuplente
-  }
 
   Consulta --> RolEmpleadoConsulta
   RolEmpleadoConsulta --> Empleado
   HistorialMascotas <-- Persona
   Sucursal --> Consulta
-  AsignacionEmpleados <-- Sucursal
-  AsignacionEmpleados --> EstadoEmpleado
-  AsignacionEmpleados --> RolEmpleado
-  Empleado <-- AsignacionEmpleados
+  Empleado <-- Sucursal
+  Empleado --> DetalleEmpleado
+  DetalleEmpleado --> Requerimiento
+  Empleado --> HistorialEmpleado
+  HistorialEmpleado --> EstadoEmpleado
+  Empleado --> HistorialRol
+  HistorialRol --> Rol
   Perro <-- Consulta
   Perro --> Vacunacion
   Vacunacion --> Vacuna
