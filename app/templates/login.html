@@ -1,25 +1,26 @@
 {% load static %}
+  
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>El Sabuezo Feliz</title>
-    <link rel="stylesheet" href="{% static 'CSS/loginStyles.css' %}">
-
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'CSS/login.css' %}">
   </head>
   <body>
+
     <div class="login-box">
-      <img src="{% static 'IMG/Logo.png' %} " class="avatar" alt="Avatar Image">
-      <h1>Login Here</h1>
-      <form>
+      <img src="{% static 'IMG/Logo.png' %}" class="avatar" alt="Avatar Image">
+      <h1>El Sabuezo Feliz</h1>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
         <!-- USERNAME INPUT -->
-        <label for="username">Usuario</label>
-        <input type="text" placeholder="Enter Username">
+        <label for="username" >Username</label>
+        <input type="text" placeholder="Enter Username" name="username">
         <!-- PASSWORD INPUT -->
-        <label for="password">Contraseña</label>
-        <input type="password" placeholder="Enter Password">
+        <label for="password" >Password</label>
+        <input type="password" placeholder="Enter Password" name="password" >
         <input type="submit" value="Log In">
-        <a href="#">Lost your Password?</a><br>
       </form>
     </div>
   </body>
