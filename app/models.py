@@ -1,4 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, password=None, **extra_fields):
+        if not username:
+            raise ValueError("El campo de nombre de usuario es obligatorio")
+        user = self.model(username=username, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("El superusuario debe tener is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("El superusuario debe tener is_superuser=True.")
+
+        return self.create_user(username, password, **extra_fields)
 
 
 class Sucursal(models.Model):
@@ -9,34 +30,75 @@ class Sucursal(models.Model):
 
     def agregarConsulta(self, consulta):
         self.consultas.append(consulta)
+    
+    def __str__(self) -> str:
+        return self.direccion()
 
-class Empleado(models.Model):
-    numeroDocumento = models.IntegerField()
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=30, unique=True)
     nombres = models.CharField(max_length=255)
     apellido = models.CharField(max_length=255)
-    fechaNacimiento = models.DateField()
-    fechaIngreso = models.DateField()
-    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
+    fechaNacimiento = models.DateField(null=True)
+    fechaIngreso = models.DateField(null=True)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE, null=True)
+    empleado = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email", "nombres", "apellido"]
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return f"{self.username} - {self.nombres} {self.apellido}"
 
 
-class AsignacionEmpleados(models.Model):
-    fechaIngreso = models.DateField()
-    fechaEgreso = models.DateField()
-    descripcion = models.CharField(max_length=255)
+    def __str__(self) -> str:
+        return self.nombre()
 
-
+class DetalleEmpleado(models.Model):
+    estudia = models.BooleanField(default=False)
+    cantidad = models.IntegerField(null=True, blank=True)
 
     def verificarEstadoEmpleado(self):
-        # Implementar lógica para verificar el estado del empleado
+        # Implementar logica para verificar estado empleado
         pass
 
-    def verificarRolEmpleado(self):
-        # Implementar lógica para verificar el rol del empleado
-        pass
+class Requerimiento(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=255)
 
- 
+    def __str__(self) -> str:
+        return self.nombre()
+    
+class HistorialEmpleado(models.Model):
+    fechaInicio = models.DateField()
+    fechaFin = models.DateField()
+    descripcion = models.CharField(max_length=255)
+
+class EstadoEmpleado(models.Model):
+    estado = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.estado()
+    
+class HistorialRol(models.Model):
+    fechaInicio = models.DateField()
+    fechaFin = models.DateField()
+    descripcion = models.CharField(max_length=255)
+
+class Rol(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.nombre()
+
 class Perro(models.Model):
-    numeroHistoriaClinica = models.IntegerField()
+    numeroHistoriaClinica = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     fechaNacimiento = models.DateField()
     raza = models.ForeignKey('Raza', on_delete=models.CASCADE)
@@ -45,6 +107,9 @@ class Perro(models.Model):
     historialMascotas = models.ForeignKey('HistorialMascotas', on_delete=models.CASCADE)
     consulta = models.TextField()  
     vacuna = models.CharField(("vacuna;"), max_length=100)
+
+    def __str__(self) -> str:
+        return self.nombre()
 
     def generarNumHistoriaClinica(self):
         # Implementar lógica para generar el número de historia clínica
@@ -75,6 +140,8 @@ class Persona(models.Model):
     numDocPersona = models.IntegerField()
     descripcion = models.CharField(("Descripcion:"), max_length=180)
 
+    def __str__(self) -> str:
+        return self.nombrePersona()
 
 class Raza(models.Model):
     denominacion = models.CharField(max_length=255)
@@ -86,9 +153,10 @@ class Raza(models.Model):
     alturaMediaHembras = models.FloatField()
     cuidadosEspeciales = models.CharField(("cuidadosEspeciales"), max_length=180)
 
-  
+    def __str__(self) -> str:
+        return self.denominacion()
+
 class Consulta(models.Model):
-    numeroOrden = models.IntegerField()
     fechaEntrada = models.DateField()
     sIntomas = models.CharField(max_length=255)
     diagnosticos = models.CharField(max_length=255)
@@ -96,6 +164,9 @@ class Consulta(models.Model):
     fechaSalida = models.DateField()
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name='consultas')
+
+    def __str__(self) -> str:
+        return self.Consulta()
 
     def verificarPersona(self):
         # Implementar lógica para verificar la persona asociada a la consulta
@@ -122,11 +193,17 @@ class Vacunacion(models.Model):
     fechaReal = models.DateField()
     descripcion = models.CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return self.descripcion()
+
 class Vacuna(models.Model):
     nombreVacuna = models.CharField(max_length=255)
     empleado = models.CharField(max_length=255)
     laboratorio = models.CharField(max_length=255)
     dosis = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.nombreVacuna()
 
 class Medicamento(models.Model):
     nombre = models.CharField(max_length=255)
@@ -135,12 +212,6 @@ class Medicamento(models.Model):
     cantidadExistente = models.IntegerField()
     cantidadMinima = models.IntegerField()
 
-class EstadoEmpleado(models.Model):
-    estudiante = models.CharField(max_length=255)
-    recibido = models.CharField(max_length=255)
-    trabaja = models.CharField(max_length=255)
-    noTrabaja = models.CharField(max_length=255)
+    def __str__(self) -> str:
+        return self.nombre()
 
-class RolEmpleado(models.Model):
-    supervisor = models.CharField(max_length=255)
-    supervisorSuplente = models.CharField(max_length=255)
