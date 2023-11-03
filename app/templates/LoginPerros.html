@@ -11,32 +11,35 @@
     <script src="https://kit.fontawesome.com/8c86341407.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <label for="nombre">Nombre Del Perro:</label><br>
-    <input type="text" name="Nombre" id="nombre" placeholder="Nombre Del Perro"><br><br>
-    <label for="Documento">Numero de historia clinica:</label><br>
-    <input type="number" name="Dni" id="NumDeH" placeholder="Numero de historia clinica del perro"><br><br>
-    <label for="Raza">Raza Del Perro:</label> <br> <br>
-    <input type="text" name="Raza" id="Raza" placeholder="Raza Del Perro"> <br> <br>
-    <label for="mail">Peso:</label><br>
-    <input type="email" name="Peso" id="Peso" placeholder="Peso del Perro"><br><br>
-    <label for="sexo">Sexo:</label><br> 
-    <input type="radio" name="genero" id="sexo">Femenino <br>
-    <input type="radio" name="genero" id="sexo">Masculino <br> <br>
-    <label for="sucu">Sucursal:</label><br> 
-    <input type="radio" name="Sucursal" id="sucu">Juan b justo 777 <br> 
-    <input type="radio" name="Sucursal" id="sucu">Humberto °1 599 <br> <br>
-    <label for="Nacimiento">Fecha De Nacimiento del Perro:</label> <br>
-    <input type="date" name="fechaN" id="Nacimiento"><br><br> 
-    <label for="Registro">Fecha De Registro del Perro:</label> <br><br>
-    <input type="date" name="FechaR" id="Registro"><br><br>
-    <label for="nombredueño">Nombre Del Dueño:</label><br>
-    <input type="text" name="NombreDueño" id="NombreDueño" placeholder="NOmbre Del Dueño">  <br>
-    <label for="ApellidoDueño"></label>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre Del Perro:</label><br>
+        <input type="text" name="Nombre" id="nombre" placeholder="Nombre Del Perro"><br><br>
+        <label for="Raza">Raza Del Perro:</label> <br> <br>
+        <input type="text" name="Raza" id="Raza" placeholder="Raza Del Perro"> <br> <br>
+        <label for="Peso">Peso:</label><br>
+        <input type="number" name="Peso" id="Peso" placeholder="Peso del Perro"><br><br>
+        <label for="sexo">Sexo:</label><br> 
+        <input type="radio" name="genero" id="sexo">Femenino <br>
+        <input type="radio" name="genero" id="sexo">Masculino <br> <br>
+        <label for="sucu">Sucursal:</label><br> 
+        <input type="radio" name="Sucursal" id="sucu">Juan b justo 777 <br> 
+        <input type="radio" name="Sucursal" id="sucu">Humberto °1 599 <br> <br>
+        <label for="Nacimiento">Fecha De Nacimiento del Perro:</label> <br>
+        <input type="date" name="fechaN" id="Nacimiento"><br><br> 
+        <label for="Registro">Fecha De Registro del Perro:</label> <br><br>
+        <input type="date" name="FechaR" id="Registro"><br><br>
+        <label for="nombredueño">Nombre Del Dueño:</label><br>
+        <input type="text" name="NombreDueño" id="NombreDueño" placeholder="NOmbre Del Dueño">  <br>
+        <label for="ApellidoDueño"></label>
+
+        <button>Crear</button>
+    </form>
     
     
     
     
-    <input type="submit">
+    
      
 </body>
 </html>

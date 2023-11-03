@@ -1,0 +1,79 @@
+erDiagram
+    Sucursal {
+        Int id_sucursal PK
+        Varchar direccion
+        Empleado empleado
+        Consulta consulta
+    }
+
+    Empleado {
+        Int numeroDocumento PK
+        String nombres
+        String apellido
+        Date fechaNacimiento
+        Date fechaIngreso
+        Int id_sucursal FK
+    }
+
+    AsignacionEmpleados {
+        Int id_asignacion PK
+        Date fechaIngreso
+        Date fechaEgreso
+        String descripcion
+    }
+
+    Perro {
+        Int numeroHistoriaClinica PK
+        String nombre
+        Date fechaNacimiento
+        Raza raza
+        Float pesoActual
+        Float alturaActual
+        Personas historialMascotas FK
+    }
+
+    HistorialMascotas {
+        Int id_historial PK
+        String estadoPerro
+        String rolPersona
+    }
+
+    Persona {
+        Int numDocPersona PK
+        String nombrePersona
+        String descripcion
+    }
+    
+    Raza {
+        Int id_raza PK
+        String denominacion
+        Float pesoMinimoMachos
+        Float pesoMaximoMachos
+        Float pesoMinimoHembras
+        Float pesoMaximoHembras
+        Float alturaMediaMachos
+        Float alturaMediaHembras
+        Float cuidadosEspeciales
+    }
+
+    Consulta {
+        Int numeroOrden PK
+        Date fechaEntrada
+        String sintomas
+        String diagnosticos
+        String medicamento FK
+        Date fechaSalida
+        String listaEmpleados
+    }
+
+    RegistroConsulta {
+        Int id_registro PK
+        String urls
+        String devolucionConsulta
+        String receta
+    }
+    RolEmpleadoConsulta {
+        String rolConsulta
+        String descripcion
+    }
+
