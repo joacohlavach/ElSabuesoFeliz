@@ -9,8 +9,12 @@ def login(request):
         return render(request, 'LoginPerros.html')
     
     else:
-        p = Perro.objects.create()
-
+        perro = request.POST["Nombre"]
+        raza =request.POST["Raza"]
+        peso = request.POST["Peso"]
+        sexo = request.POST["genero"]
+        p = Perro.objects.create(nombre=perro,raza=raza,peso=peso,sexo=sexo)
+        print (p)
 def razaperro(request):
     return render(request, 'razaperro_template.html')
 
