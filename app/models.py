@@ -86,7 +86,7 @@ class Raza(models.Model):
     alturaMediaHembras = models.FloatField()
     cuidadosEspeciales = models.CharField(("cuidadosEspeciales"), max_length=180)
 
-
+  
 class Consulta(models.Model):
     numeroOrden = models.IntegerField()
     fechaEntrada = models.DateField()

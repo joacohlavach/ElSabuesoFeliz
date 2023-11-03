@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/8c86341407.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="/CrearPerro/" method="POST">
         {% csrf_token %}
         <label for="nombre">Nombre Del Perro:</label><br>
         <input type="text" name="Nombre" id="nombre" placeholder="Nombre Del Perro"><br><br>
@@ -32,10 +32,10 @@
         <label for="Registro">Fecha De Registro del Perro:</label> <br><br>
         <input type="date" name="FechaR" id="Registro"><br><br>
         <label for="nombredueño">Nombre Del Dueño:</label><br>
-        <input type="text" name="NombreDueño" id="NombreDueño" placeholder="NOmbre Del Dueño">  <br>
+        <input type="text" name="NombreDueño" id="NombreDueño" placeholder="Nombre Del Dueño">  <br>
         <label for="ApellidoDueño"></label>
 
-        <button>Crear</button>
+        <input type="submit" value="Guardar">
     </form>
     
     

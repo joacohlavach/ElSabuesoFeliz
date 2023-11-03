@@ -1,9 +1,11 @@
 from django.contrib import admin
-from .views import *
+from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', base, name = 'main'),
-    path('login/', login, name = 'loginPerro'),
-    path('razas/', razaperro, name='Raza'),
+    path('', views.base, name = 'main'),
+    path("login/",views.guardar_perro, name= 'login'),
+    path('razas/', views.razaperro, name='Raza'),
+
+
 ]
