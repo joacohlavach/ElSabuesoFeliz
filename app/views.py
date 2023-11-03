@@ -6,12 +6,15 @@ from .models import *
 from django.contrib.auth import *
 from django.db.utils import *
 
+def home(request):
+    return render(request, "./login.html")
+
 def base(request):
-    return render(request,'Veterinaria_list.html')
+    return render(request,'./Veterinaria_list.html')
     
 def login_perro(request):
     if request.method == 'GET':
-        return render(request, 'LoginPerros.html')
+        return render(request, './LoginPerros.html')
     
     else:
         perro = request.POST["Nombre"]
