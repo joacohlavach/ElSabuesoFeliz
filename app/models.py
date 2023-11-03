@@ -70,7 +70,7 @@ class AsignacionEmpleados(models.Model):
 
  
 class Perro(models.Model):
-    numeroHistoriaClinica = models.IntegerField()
+    numeroHistoriaClinica = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     fechaNacimiento = models.DateField()
     raza = models.ForeignKey('Raza', on_delete=models.CASCADE)
