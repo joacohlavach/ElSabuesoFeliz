@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 admin.site.register(Perro)
 admin.site.register(Sucursal)
-admin.site.register(Empleado)
+admin.site.register(Usuario)
 admin.site.register(Raza)
 admin.site.register(Consulta)
 admin.site.register(Vacuna)
