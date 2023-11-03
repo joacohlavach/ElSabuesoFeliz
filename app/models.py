@@ -55,8 +55,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
 class AsignacionEmpleados(models.Model):
     fechaIngreso = models.DateField()
-    fechaEgreso = models.DateField()
-    descripcion = models.CharField(max_length=255)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
+    estado = models.ForeignKey('EstadoEmpleado', on_delete=models.CASCADE)
 
 
 
