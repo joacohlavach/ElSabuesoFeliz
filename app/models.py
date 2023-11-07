@@ -46,7 +46,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     fechaIngreso = models.DateField()
     sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
     estado = models.ForeignKey('EstadoEmpleado', on_delete=models.CASCADE)
-    USERNAME_FIELD = 'nombres'
+    USERNAME_FIELD = 'apellido'
 
     def __str__(self) -> str:
         return self.nombre()
