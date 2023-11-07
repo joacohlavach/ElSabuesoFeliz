@@ -42,11 +42,21 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     nombres = models.CharField(max_length=255)
     apellido = models.CharField(max_length=255)
-    fechaNacimiento = models.DateField()
-    fechaIngreso = models.DateField()
-    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
-    estado = models.ForeignKey('EstadoEmpleado', on_delete=models.CASCADE)
-    USERNAME_FIELD = 'apellido'
+    fechaNacimiento = models.DateField(null=True)
+    fechaIngreso = models.DateField(null=True)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE, null=True)
+    empleado = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email", "nombres", "apellido"]
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return f"{self.username} - {self.nombres} {self.apellido}"
+
 
     def __str__(self) -> str:
         return self.nombre()
