@@ -18,4 +18,5 @@ admin.site.register(EstadoEmpleado)
 admin.site.register(Persona)
 admin.site.register(HistorialMascotas)
 admin.site.register(HistorialEmpleado)
+admin.site.register(CustomUserManager)
     
