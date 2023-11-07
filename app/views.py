@@ -8,11 +8,7 @@ from django.db.utils import *
 
 def base(request):
     return render(request,'Veterinaria_list.html')
-<<<<<<< HEAD
 
-
-=======
-    
 def login_perro(request):
     if request.method == 'GET':
         return render(request, 'LoginPerros.html')
@@ -24,11 +20,7 @@ def login_perro(request):
         sexo = request.POST["genero"]
         p = Perro.objects.create(nombre=perro,raza=raza,peso=peso,sexo=sexo)
         print (p)
-<<<<<<< HEAD
->>>>>>> 48367e5 (login perros)
-=======
 
->>>>>>> 15ff256 (coreccion login)
 def razaperro(request):
     return render(request, 'razaperro_template.html')
 
