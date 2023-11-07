@@ -48,6 +48,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     empleado = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email", "nombres", "apellido"]
