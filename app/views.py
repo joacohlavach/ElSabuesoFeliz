@@ -1,6 +1,7 @@
 from .models import *
 from django.http import HttpRequest
 from django.shortcuts import render
+from django.views.generic import View
 from .models import *
 from django.contrib.auth import *
 from django.db.utils import *
@@ -8,14 +9,13 @@ from django.db.utils import *
 def base(request):
     return render(request,'Veterinaria_list.html')
     
-def guardar_perro_perro(request: HttpRequest):
-    
+def guardar_perro(request: HttpRequest):
     if request.method == 'POST':
-        nombreperro = request.POST['Nombre']
-        nombreperro = request.POST['Nombre']
-        Perro.objects.create(nombreperro)
+        nombre_perro = request.POST.get('Nombre', '')
+        Perro.objects.create(nombreperro=nombre_perro)
+        return render(request, "otra_vista.html", {'mensaje': 'Perro guardado exitosamente'})
     else:
-        return render(request,"LoginPerros.html")
+        return render(request, "LoginPerros.html")
 
 
 def razaperro(request):
