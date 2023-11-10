@@ -40,6 +40,6 @@ class LoginView(View):
 
         if user is not None:
             login(request, user)
-            return render(request, "Veterinaria_list.html", {'error_message': 'Credenciales inválidas'})
+            return render(request, "Veterinaria_list.html")
         else:
             return render(request, self.template_name, {'error_message': 'Credenciales inválidas'})

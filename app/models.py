@@ -58,10 +58,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.username} - {self.nombres} {self.apellido}"
 
-
-    def __str__(self) -> str:
-        return self.nombre()
-
 class DetalleEmpleado(models.Model):
     estudia = models.BooleanField(default=False)
     cantidad = models.IntegerField(null=True, blank=True)
