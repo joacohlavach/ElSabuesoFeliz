@@ -45,6 +45,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     empleado = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email", "nombres", "apellido"]
@@ -98,7 +99,6 @@ class Rol(models.Model):
         return self.nombre()
 
 class Perro(models.Model):
-    numeroHistoriaClinica = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     fechaNacimiento = models.DateField()
     raza = models.ForeignKey('Raza', on_delete=models.CASCADE)

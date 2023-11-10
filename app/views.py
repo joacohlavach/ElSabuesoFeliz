@@ -1,30 +1,48 @@
 from .models import *
-from django.http import HttpRequest
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import *
+from django.contrib.auth import *
+from django.db.utils import *
 from django.contrib.auth import *
 from django.db.utils import *
 
 def base(request):
     return render(request,'Veterinaria_list.html')
+
+def login_perro(request):
+    if request.method == 'GET':
+        return render(request, 'LoginPerros.html')
     
-def guardar_perro(request: HttpRequest):
-    if request.method == 'POST':
+    else:
+        perro = request.POST["Nombre"]
+        raza =request.POST["Raza"]
+        peso = request.POST["Peso"]
+        sexo = request.POST["genero"]
+        p = Perro.objects.create(nombre=perro,raza=raza,peso=peso,sexo=sexo)
+        print (p)
+
+def guardar_perro_perro(request: HttpRequest):
+    if request.method == 'GET':
+        if request.method == 'POST':
         nombre_perro = request.POST.get('Nombre', '')
         Perro.objects.create(nombreperro=nombre_perro)
         return render(request, "otra_vista.html", {'mensaje': 'Perro guardado exitosamente'})
     else:
         return render(request, "LoginPerros.html")
 
+    
+    else:
+        perro = request.POST["Nombre"]
+        raza =request.POST["Raza"]
+        peso = request.POST["Peso"]
+        sexo = request.POST["genero"]
+        p = Perro.objects.create(nombre=perro,raza=raza,peso=peso,sexo=sexo)
+        print (p)
 
 def razaperro(request):
     return render(request, 'razaperro_template.html')
-
-def hola (request):
-    ...
-
-
 
 class LoginView(View):
     template_name = 'login.html'
@@ -41,6 +59,6 @@ class LoginView(View):
 
         if user is not None:
             login(request, user)
-            return render(request, "Veterinaria_list.html", {'error_message': 'Credenciales inválidas'})
+            return render(request, "Veterinaria_list.html")
         else:
             return render(request, self.template_name, {'error_message': 'Credenciales inválidas'})
