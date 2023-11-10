@@ -20,6 +20,27 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("El superusuario debe tener is_superuser=True.")
 
         return self.create_user(username, password, **extra_fields)
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, password=None, **extra_fields):
+        if not username:
+            raise ValueError("El campo de nombre de usuario es obligatorio")
+        user = self.model(username=username, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("El superusuario debe tener is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("El superusuario debe tener is_superuser=True.")
+
+        return self.create_user(username, password, **extra_fields)
 
 
 class Sucursal(models.Model):
@@ -30,33 +51,31 @@ class Sucursal(models.Model):
 
     def agregarConsulta(self, consulta):
         self.consultas.append(consulta)
-    
+        
     def __str__(self) -> str:
         return self.direccion()
-
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     nombres = models.CharField(max_length=255)
     apellido = models.CharField(max_length=255)
-    fechaNacimiento = models.DateField(null=True)
-    fechaIngreso = models.DateField(null=True)
+    fechaNacimiento = models.DateField(null=Truenull=True)
+    fechaIngreso = models.DateField(null=Truenull=True)
     sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE, null=True)
     empleado = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    email = models.EmailField(unique=True, null=True)
+
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email", "nombres", "apellido"]
+
 
     objects = CustomUserManager()
 
     def __str__(self):
         return f"{self.username} - {self.nombres} {self.apellido}"
-
-
-    def __str__(self) -> str:
-        return self.nombre()
 
 class DetalleEmpleado(models.Model):
     estudia = models.BooleanField(default=False)
@@ -96,9 +115,7 @@ class Rol(models.Model):
 
     def __str__(self) -> str:
         return self.nombre()
-
 class Perro(models.Model):
-    numeroHistoriaClinica = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     fechaNacimiento = models.DateField()
     raza = models.ForeignKey('Raza', on_delete=models.CASCADE)

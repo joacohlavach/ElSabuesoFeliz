@@ -8,11 +8,9 @@ from django.db.utils import *
 
 def base(request):
     return render(request,'Veterinaria_list.html')
-    
 def login_perro(request):
     if request.method == 'GET':
         return render(request, 'LoginPerros.html')
-    
     else:
         perro = request.POST["Nombre"]
         raza =request.POST["Raza"]
@@ -40,6 +38,7 @@ class LoginView(View):
 
         if user is not None:
             login(request, user)
-            return render(request, "Veterinaria_list.html", {'error_message': 'Credenciales inválidas'})
+
+            return render(request, "Veterinaria_list.html")
         else:
             return render(request, self.template_name, {'error_message': 'Credenciales inválidas'})
